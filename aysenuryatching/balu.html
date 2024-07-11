@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÇINARIM A Rezervasyon</title>
+    <link rel="stylesheet" href="styles/cinarimarez.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="styles/img/logo.png" alt="Firma Logosu">
+            </div>
+            <div class="nav-links" id="nav-links">
+                <ul>
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
+                    <li><a href="index.html#ozel-yat-kiralama">Özel Yat Kiralama</a></li>
+                    <li><a href="index.html#iletisim">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                ☰
+            </div>
+        </nav>
+    </header>
+
+    <section class="reservation-section">
+        <div class="reservation-content">
+            <div class="left-column">
+                <img src="styles/img/balu.jpg" alt="ÇINARIM A" class="yacht-img">
+                <h2>Günlük Fiyat: <span id="daily-price" data-may="1000" data-june="1200" data-july="2000"
+                        data-august="2000" data-september="1600" data-october="1600">1000</span> EURO</h2>
+                <div id="datepicker"></div>
+                <div class="reservation-details">
+                    <div>
+                        <label for="reservation-start-date">Rezervasyon Başlangıç Tarihi:</label>
+                        <input type="text" id="reservation-start-date" readonly>
+                    </div>
+                    <div>
+                        <label for="reservation-days">Rezervasyon Gün Sayısı:</label>
+                        <input type="number" id="reservation-days" name="days" min="1" value="1"
+                            onchange="calculateTotalPrice()">
+                    </div>
+                    <div>
+                        <label for="total-price">Toplam Fiyat:</label>
+                        <input type="text" id="total-price" readonly>
+                    </div>
+                    <button onclick="redirectToPayment()">ÖDEME YAP</button>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="price-list">
+                    <h3>Fiyat Listesi</h3>
+                    <p>Günlük:</p>
+                    <ul>
+                        <li>Mayıs: 1000 Euro</li>
+                        <li>Haziran: 1200 Euro</li>
+                        <li>Temmuz: 2000 Euro</li>
+                        <li>Ağustos: 2000 Euro</li>
+                        <li>Eylül: 1600 Euro</li>
+                        <li>Ekim: 1600 Euro</li>
+                    </ul>
+                    <p>Haftalık:</p>
+                    <ul>
+                        <li>Mayıs: 5000 Euro</li>
+                        <li>Haziran: 6000 Euro</li>
+                        <li>Temmuz: 10000 Euro</li>
+                        <li>Ağustos: 10000 Euro</li>
+                        <li>Eylül: 8000 Euro</li>
+                        <li>Ekim: 8000 Euro</li>
+                    </ul>
+                    <ul>
+                        <li>BOY: 22 Metre</li>
+                        <li>EN: 6 METRE</li>
+                        <li>Max. Rezervasyon: 12</li>
+                        <li>Kabin sayısı: 6</li>
+                        <li>Çalışan personel sayısı: 3</li>
+                        <li>Rota: Fethiye, Kaş</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="iletisim" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-logo">
+                <img src="styles/img/logo.png" alt="Büyük Logo">
+            </div>
+            <div class="contact-content">
+                <h2>İletişim</h2>
+                <p>AYŞENUR YATÇILIK TURİZM VE TİCARET LTD ŞTİ</p>
+                <p>Adres: Çıldır Mah. 170. Sk. Şenbay Apt. No: 1 İç Kapı No: 20 MUĞLA, Marmaris</p>
+                <p>Email: <a href="mailto:kaptanismail02@gmail.com">kaptanismail02@gmail.com</a></p>
+                <p>Telefon: <a href="tel:+905312214628">+90 531 221 46 28</a></p>
+                <div class="social-media">
+                    <a href="https://www.instagram.com/aysenur.yachting/" target="_blank">
+                        <img src="styles/img/insta.jpg" alt="Instagram" class="social-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="contact-image">
+                <img src="styles/img/sertifika.png" alt="Contact Image">
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText) {
+                    $('#reservation-start-date').val(dateText);
+                    updateDailyPrice(dateText);
+                    calculateTotalPrice();
+                }
+            });
+        });
+
+        function updateDailyPrice(dateText) {
+            const date = new Date(dateText.split('/').reverse().join('/'));
+            const month = date.getMonth();
+            const dailyPriceElement = document.getElementById('daily-price');
+            let newPrice;
+            switch (month) {
+                case 4:
+                    newPrice = dailyPriceElement.getAttribute('data-may');
+                    break;
+                case 5:
+                    newPrice = dailyPriceElement.getAttribute('data-june');
+                    break;
+                case 6:
+                    newPrice = dailyPriceElement.getAttribute('data-july');
+                    break;
+                case 7:
+                    newPrice = dailyPriceElement.getAttribute('data-august');
+                    break;
+                case 8:
+                    newPrice = dailyPriceElement.getAttribute('data-september');
+                    break;
+                case 9:
+                    newPrice = dailyPriceElement.getAttribute('data-october');
+                    break;
+                default:
+                    newPrice = dailyPriceElement.getAttribute('data-may');
+            }
+            dailyPriceElement.textContent = newPrice;
+        }
+
+        function calculateTotalPrice() {
+            const dailyPrice = parseInt(document.getElementById('daily-price').textContent);
+            const days = parseInt(document.getElementById('reservation-days').value);
+            const totalPrice = dailyPrice * days;
+            document.getElementById('total-price').value = totalPrice + ' EURO';
+        }
+
+        function redirectToPayment() {
+            const totalPrice = document.getElementById('total-price').value;
+            window.location.href = `odeme.html?totalPrice=${encodeURIComponent(totalPrice)}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

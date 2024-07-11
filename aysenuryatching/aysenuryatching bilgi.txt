@@ -1,0 +1,13 @@
+IP adresi= 92.205.170.77
+
+ıp başlangıç= 0.0.0.0
+ıp bitiş= 255.255.255.255
+
+Sanal mağaza yazılım dili= HTML, css, javascript, PHP
+
+sanal mağazanın çalıştığı işletim sistemi= Windows
+
+nerede barındırılıyor = Godaddy,  www.godaddy.com
+
+
+Arif Kesici

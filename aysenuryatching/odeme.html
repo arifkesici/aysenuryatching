@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Sayfası</title>
+    <link rel="stylesheet" href="styles/odeme.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="styles/img/logo.png" alt="Firma Logosu">
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                ☰
+            </div>
+            <div class="nav-links" id="nav-links">
+                <ul>
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
+                    <li><a href="index.html#ozel-yat-kiralama">Özel Yat Kiralama</a></li>
+                    <li><a href="index.html#iletisim">İletişim</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="payment-section">
+        <div class="payment-content">
+            <h2>Toplam Tutar: <span id="total-amount">0</span> EURO</h2>
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="name">İsim Soyisim:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Adres:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon Numarası:</label>
+                    <input type="text" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Kart Numarası:</label>
+                    <input type="text" id="card-number" name="card-number" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiry-date">Vade (MM/YYYY):</label>
+                    <input type="text" id="expiry-date" name="expiry-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvc">Güvenlik Kodu (CVC):</label>
+                    <input type="text" id="cvc" name="cvc" required>
+                </div>
+                <div class="contract-section">
+                    <div class="contract-box">
+                        <p>Ödeme işlemini gerçekleştirmeden önce <a href="GizlilikveGuvenlikPolitikasi.pdf"
+                                target="_blank">Gizlilik ve Güvenlik Politikasını</a> okumanız gerekmektedir.</p>
+                        <p>Ödeme işlemini gerçekleştirmeden önce <a href="Mesafelisatissozlesmesi.pdf"
+                                target="_blank">Mesafeli Satış Sözleşmesini</a> okumanız gerekmektedir.</p>
+                        <p>Ödeme işlemini gerçekleştirmeden önce <a href="sozlesme.pdf" target="_blank">Tekne Kiralama
+                                Sözleşmesini</a> okumanız gerekmektedir.</p>
+                        <input type="checkbox" id="contract" name="contract">
+                        <label for="contract">Okudum, onayladım</label>
+                    </div>
+                </div>
+                <button type="submit" id="submit-button" disabled>ÖDEME YAP</button>
+                <div class="cardsimage">
+                    <img src="styles/img/mastercard.png" alt="cards">
+                    <div class="cardsameximage">
+                        <img src="styles/img/amex.png" alt="amex">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="iletisim" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-logo">
+                <img src="styles/img/logo.png" alt="Büyük Logo">
+            </div>
+            <div class="contact-content">
+                <h2>İletişim</h2>
+                <p>AYŞENUR YATÇILIK TURİZM VE TİCARET LTD ŞTİ</p>
+                <p>Adres: Çıldır Mah. 170. Sk. Şenbay Apt. No: 1 İç Kapı No: 20 MUĞLA, Marmaris</p>
+                <p>Email: <a href="mailto:kaptanismail02@gmail.com">kaptanismail02@gmail.com</a></p>
+                <p>Telefon: <a href="tel:+905312214628">+90 531 221 46 28</a></p>
+                <div class="social-media">
+                    <a href="https://www.instagram.com/aysenur.yachting/" target="_blank">
+                        <img src="styles/img/insta.jpg" alt="Instagram" class="social-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="contact-image">
+                <img src="styles/img/sertifika.png" alt="Contact Image">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const totalPrice = urlParams.get('totalPrice');
+            if (totalPrice) {
+                document.getElementById('total-amount').textContent = totalPrice;
+            }
+
+            const contractCheckbox = document.getElementById('contract');
+            const submitButton = document.getElementById('submit-button');
+
+            contractCheckbox.addEventListener('change', function () {
+                submitButton.disabled = !this.checked;
+            });
+
+            document.getElementById('payment-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                sendEmail();
+            });
+        });
+
+        function sendEmail() {
+            const formData = new FormData(document.getElementById('payment-form'));
+            formData.append('totalPrice', document.getElementById('total-amount').textContent);
+
+            fetch('send_email.php', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    alert('Ödeme bilgileriniz başarıyla gönderildi.');
+                } else {
+                    alert('Bir hata oluştu, lütfen tekrar deneyin.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Bir hata oluştu, lütfen tekrar deneyin.');
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,324 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+.hero-section {
+    min-height: 100vh;
+    background: url('img/anasayfabackground.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(10, 23, 67);
+    flex-direction: column;
+    padding-top: 80px;
+    /* Navbar yüksekliği için boşluk */
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.old-site {
+    margin-top: 20px;
+}
+
+.old-site h2 {
+    font-size: 2em;
+    color: white;
+}
+
+.old-site-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.old-site-button:hover {
+    background-color: #0056b3;
+}
+
+.about-section {
+    height: 100vh;
+    background: url('img/hakkındabackground.jpeg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    flex-direction: column;
+}
+
+.about-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.about-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.yacht-section {
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+}
+
+.yacht {
+    text-align: center;
+    margin: 20px;
+}
+
+.yacht img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.yacht h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+section {
+    padding: 60px 20px;
+}
+
+#hakkimizda,
+#ozel-yat-kiralama,
+#iletisim {
+    padding-top: 80px;
+}
+
+#hakkimizda h2,
+#ozel-yat-kiralama h2,
+#iletisim h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.contact-section {
+    background-color: #f8f8f8;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contact-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact-logo img {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+.contact-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-align: left;
+    flex: 1;
+    min-width: 300px;
+    margin-bottom: 20px;
+}
+
+.contact-content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.contact-content p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.contact-content a {
+    color: white;
+    text-decoration: none;
+}
+
+.contact-content a:hover {
+    text-decoration: underline;
+}
+
+.contact-image img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.social-media {
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin-right: 0;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .yacht-section {
+        flex-direction: column;
+    }
+
+    .yacht {
+        margin: 20px 0;
+    }
+
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .contact-logo img {
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+}
